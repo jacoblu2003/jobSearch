@@ -1,4 +1,4 @@
-package ca.zhaogong.jobSearch;
+package ca.zhaogong.jobsearch;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
