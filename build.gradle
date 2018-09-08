@@ -22,14 +22,22 @@ repositories {
 	mavenCentral()
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-jersey')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile("org.springframework.boot:spring-boot-devtools")
 	compile 'mysql:mysql-connector-java'
 	runtime group: 'javax.xml.bind', name: 'jaxb-api'
 	runtime group: 'javax.activation', name: 'activation', version: '1.1.1'
 //	compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
+bootJar {
+	from('web/dist') {
+		into 'static'
+	}
+}
+
+bootJar.dependsOn('web:build')

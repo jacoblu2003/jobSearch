@@ -17,7 +17,8 @@ public class UserResource {
     private UserRepository userRepository;
 
     @GET
-    public Object getUsers() {
+    public Object getUsers8() {
+        int a  = 7;
         return userRepository.findAll();
     }
 }
