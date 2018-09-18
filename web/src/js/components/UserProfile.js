@@ -1,9 +1,10 @@
 import React from 'react';
+import UserActions from '../actions/userActions';
 
-export default class Test extends React.Component{
+export default class UserProfile extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {state1: 5};
+        this.state = {user: {... props.user}};
     }
 
     componentDidMount(){
@@ -29,6 +30,9 @@ export default class Test extends React.Component{
     }
 
     render(){
-        return <div>kjjst77kjlate1: {this.state.state1}</div>;
+        return <div>
+            Name: <input value={this.state.user.name} />
+            <button onClick={this.props.store.dispatch(UserActions.updateUser(this.state.user))}>Update</button>
+        </div>;
     }
 }

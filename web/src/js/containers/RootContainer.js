@@ -1,13 +1,11 @@
 import React from 'react';
-import Test from '../components/Test';
-import { hot } from 'react-hot-loader';
+import UserProfile from '../components/UserProfile';
+import RegisterUser from "../components/RegisterUser";
 
-const App = class RootContainer extends React.Component {
+export default class RootContainer extends React.Component {
     render() {
         return <div id="rootContainer">
-            <Test/>
+            <RegisterUser />
         </div>;
     }
 };
-
-export default hot(module)(App);

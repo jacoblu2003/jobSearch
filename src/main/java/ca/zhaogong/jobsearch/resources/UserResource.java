@@ -1,11 +1,15 @@
 package ca.zhaogong.jobsearch.resources;
 
 
+import ca.zhaogong.jobsearch.UserContext;
+import ca.zhaogong.jobsearch.entities.User;
 import ca.zhaogong.jobsearch.repositories.UserRepository;
+import ca.zhaogong.jobsearch.utils.PasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
@@ -17,8 +21,23 @@ public class UserResource {
     private UserRepository userRepository;
 
     @GET
-    public Object getUsers8() {
-        int a  = 7;
+    public Object getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @POST
+    @Path("register")
+    public User RegisterUser(User user){
+        user.setSalt(PasswordUtils.generateSalt());
+        user.setPassword(PasswordUtils.hashPassword(user.getPassword(), user.getSalt()));
+
+        User newUser = userRepository.save(user);
+        return newUser;
+    }
+
+    @GET
+    @Path("current")
+    public User getCurrentUser() {
+        return userRepository.findById(UserContext.getCurrentUser().getId()).get();
     }
 }
